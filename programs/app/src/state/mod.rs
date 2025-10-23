@@ -1,2 +1,2 @@
-pub mod Counter;
-pub use Counter::*;
+pub mod counter;
+pub use counter::*;
