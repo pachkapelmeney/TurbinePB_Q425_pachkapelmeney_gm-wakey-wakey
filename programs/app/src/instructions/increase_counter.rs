@@ -9,7 +9,7 @@ pub struct IncreaseCounter<'info>{
     #[account(mut)]
     pub authority: Signer<'info>,
 
-    #[account(mut, seeds = [b"counter", authority.key().as_ref()], bump)]
+    #[account(mut, has_one = authority, seeds = [b"counter", authority.key().as_ref()], bump)]
     pub counter: Account<'info, Counter>,
 
     pub system_program: Program<'info, System>
