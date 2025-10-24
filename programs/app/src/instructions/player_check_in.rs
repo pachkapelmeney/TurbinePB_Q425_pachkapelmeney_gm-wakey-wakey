@@ -28,6 +28,9 @@ pub fn handler(ctx: Context<PlayerCheckIn>, submited_wake_up_time_utc: u64) -> R
     let day_start_ts = day_index * 86400;
     let legit_checkin_window = day_start_ts as u64 + player.scheduled_wake_up_time_utc + team.grace_period_seconds;
     
+    //the counter part! ha
+    team.streak_counter = team.streak_counter.checked_add(1).ok_or(crate::error::ErrorCode::Overflow)?;
+
     if (submited_wake_up_time_utc > legit_checkin_window) //:TODO add an "automatic fail" if not submitteed on time
         {team.streak_counter = 0;} //even 1 late-submitted player resets the whole team streak!
 

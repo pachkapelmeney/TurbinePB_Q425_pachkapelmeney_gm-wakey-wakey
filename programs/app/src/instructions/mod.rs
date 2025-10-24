@@ -1,9 +1,9 @@
-pub mod initialize;
+pub mod initialize_counter_legacy;
 
-pub use initialize::*;
+pub use initialize_counter_legacy::*;
 
-pub mod increase_counter;
-pub use increase_counter::*;
+pub mod increase_counter_legacy;
+pub use increase_counter_legacy::*;
 
 pub mod join_team;
 pub use join_team::*;
