@@ -6,6 +6,12 @@ GM your Mornings. Build your wake-up schedule.
 (With frens)
 
 
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+
 GM-wakey-wakey is a social habit-building dApp on Solana that helps you and your team build a consistent morning routine. It uses the power of social accountability and on-chain streaks to turn the struggle of waking up into a collaborative game.
 
 ## The Problem
@@ -47,6 +53,14 @@ The program leverages a two-account model to manage state:
 *   **Player Account (PDA):** Each team member gets their own Player account, which stores their personal settings like wake_up_time, linking them to a specific team.
 
 All time-based logic is handled securely on-chain using Solana's `Clock` sysvar, ensuring that the check-in window is enforced by the protocol, not the client.
+
+PDA Data Diagram:
+<img width="1418" height="704" alt="image" src="https://github.com/user-attachments/assets/699a3f45-4dd2-4bd7-b49e-c6ee725f1dad" />
+
+Data-Flow Diagram:
+<img width="1245" height="802" alt="image" src="https://github.com/user-attachments/assets/d6f4515c-67b8-41c0-9d69-f529586868f4" />
+
+
 
 ## Quick Start & Testing
 
