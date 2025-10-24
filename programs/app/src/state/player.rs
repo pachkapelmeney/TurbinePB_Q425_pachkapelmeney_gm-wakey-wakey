@@ -9,5 +9,5 @@ pub struct Player{
     ///player is assigned to #team
     pub team: Pubkey,
 
-    pub wake_up_time_utc: u64,
+    pub scheduled_wake_up_time_utc: u64,
 }

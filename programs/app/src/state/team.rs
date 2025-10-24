@@ -11,4 +11,6 @@ pub struct Team
     // how long is the time-window for checking in?
     // move to the "Game-Session" PDA in the future
     pub grace_period_seconds: u64,
+
+    pub player_count: u8,
 }

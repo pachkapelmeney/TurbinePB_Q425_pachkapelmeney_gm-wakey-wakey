@@ -28,15 +28,23 @@ pub struct JoinTeam<'info>{
 pub fn handler(ctx: Context<JoinTeam>) -> Result<()>
 {
     let team = &mut ctx.accounts.team;
-    if team.players.len() >= 3
-        {return Err(Error::from(TooMuchPlayersInTeam))}
+    // if team.players.len() >= 3
+    //     {return Err(Error::from(TooMuchPlayersInTeam))}
+    // let push_result = team.players.push(
+    //     player.key()
+    // );
+    if team.player_count >= 3
+    {return Err(Error::from(TooMuchPlayersInTeam))}
 
     let player = &mut ctx.accounts.player;
-    let push_result = team.players.push(
-        player.key()
-    );
+    
+    
 
     player.team = team.key();
+
+    require!(player.authority.key() == ctx.accounts.authority.key(), crate::error::ErrorCode::TooMuchPlayersInTeam);
+
+    team.player_count.checked_add(1);
 
     Ok(())
 }

@@ -32,7 +32,10 @@ pub fn handler(ctx: Context<Initialize>) -> Result<()> {
     counter.bump = ctx.bumps.counter;
 
     let team = &mut ctx.accounts.team;
-    team.players = vec![];
+    team.grace_period_seconds = 300; // 5 mins
+
+
+    
 
 
 

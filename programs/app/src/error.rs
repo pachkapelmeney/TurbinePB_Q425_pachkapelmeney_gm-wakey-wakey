@@ -6,5 +6,8 @@ pub enum ErrorCode {
     CustomError,
 
     #[msg("Already 3 players in a team!")]
-    TooMuchPlayersInTeam
+    TooMuchPlayersInTeam,
+
+    #[msg("Only player can add him self")]
+    OnlyPlayerCanAddHimself
 }

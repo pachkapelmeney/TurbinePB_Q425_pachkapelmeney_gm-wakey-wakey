@@ -19,11 +19,15 @@ pub mod app {
         initialize::handler(ctx)
     }
 
-    pub fn increase_counter(ctx: Context<IncreaseCounter>) -> Result<()> {
-        increase_counter::handler(ctx)
+    // pub fn increase_counter(ctx: Context<IncreaseCounter>) -> Result<()> {
+    //     increase_counter::handler(ctx)
+    // }
+
+    pub fn player_check_in(ctx: Context<PlayerCheckIn>, submited_wake_up_time_utc: u64) -> Result<()> {
+        player_check_in::handler(ctx, submited_wake_up_time_utc)
     }
 
-    pub fn player_check_in
-
-    pub fn join_team
+    pub fn join_team(ctx: Context<JoinTeam>) -> Result<()> {
+        join_team::handler(ctx)
+    }
 }
