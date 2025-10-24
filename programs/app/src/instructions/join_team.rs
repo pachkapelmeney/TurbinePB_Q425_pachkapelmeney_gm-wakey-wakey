@@ -12,8 +12,8 @@ pub struct JoinTeam<'info>{
     #[account(
         init,
         payer = authority,
-        space = 8+32+32+8,
-        seeds = [b"player", &team.key().to_bytes().as_ref(), authority.key().as_ref()],
+        space = 8 + 32 + 32 + 8,
+        seeds = [b"player", team.key().as_ref(), authority.key().as_ref()],
         bump
     )]
     pub player: Account<'info, Player>,
@@ -33,8 +33,9 @@ pub fn handler(ctx: Context<JoinTeam>) -> Result<()>
     // let push_result = team.players.push(
     //     player.key()
     // );
-    if team.player_count >= 3
-    {return Err(Error::from(TooMuchPlayersInTeam))}
+    if team.player_count >= 3 {
+        return Err(error!(ErrorCode::TooMuchPlayersInTeam));
+    }
 
     let player = &mut ctx.accounts.player;
     
@@ -44,7 +45,7 @@ pub fn handler(ctx: Context<JoinTeam>) -> Result<()>
 
     require!(player.authority.key() == ctx.accounts.authority.key(), crate::error::ErrorCode::TooMuchPlayersInTeam);
 
-    team.player_count.checked_add(1);
+    team.player_count = team.player_count.saturating_add(1);
 
     Ok(())
 }

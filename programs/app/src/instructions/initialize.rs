@@ -11,16 +11,11 @@ pub struct Initialize<'info> {
 
     #[account(init,
     payer = authority,
-    space = 8+32+8+8+1, // recheck
+    space = 8+32+1+1,
     seeds = [b"counter", authority.key().as_ref()],
     bump )]
     
     pub counter: Account<'info, Counter>,
-
-        #[account(init,
-        payer = authority,
-        space = 8+3*32+32)] //donut forget to update if changed the Team struct
-    pub team: Account<'info, Team>,
 
     pub system_program: Program<'info, System>
 }
@@ -31,15 +26,6 @@ pub fn handler(ctx: Context<Initialize>) -> Result<()> {
     counter.count = 0;
     counter.bump = ctx.bumps.counter;
 
-    let team = &mut ctx.accounts.team;
-    team.grace_period_seconds = 300; // 5 mins
-
-
-    
-
-
-
-    // ctx.accounts.authority 
     msg!("Greetings from: {:?}", ctx.program_id);
     Ok(())
 }

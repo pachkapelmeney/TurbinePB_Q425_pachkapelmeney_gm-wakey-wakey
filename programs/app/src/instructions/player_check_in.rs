@@ -8,7 +8,9 @@ use crate::error::ErrorCode::OnlyPlayerCanAddHimself;
 #[derive(Accounts)]
 pub struct PlayerCheckIn<'info>{
     pub authority: Signer<'info>,
+    #[account(mut)]
     pub player: Account<'info, Player>,
+    #[account(mut)]
     pub team: Account<'info, Team>
 }
 
@@ -17,7 +19,7 @@ pub fn handler(ctx: Context<PlayerCheckIn>, submited_wake_up_time_utc: u64) -> R
     let player = &mut ctx.accounts.player;
     let team = &mut ctx.accounts.team;
 
-    require!{ctx.accounts.authority.key() == player.key(), crate::error::ErrorCode::OnlyPlayerCanAddHimself};
+    require!(ctx.accounts.authority.key() == player.authority, crate::error::ErrorCode::OnlyPlayerCanAddHimself);
 
     // unique number for each day
     let day_index = Clock::get()?.unix_timestamp / 86400;
