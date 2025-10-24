@@ -16,6 +16,8 @@ pub fn handler(ctx: Context<CheckIn>) -> Result<()>
     let team = &mut ctx.accounts.team;
     // unique number for each day
     let day_index = Clock::get()?.unix_timestamp / 86400;
+    let day_start_ts = day_index * 86400;
+    let checkin_window = day_start_ts + wake_up_time;
 
     Ok(())
 }

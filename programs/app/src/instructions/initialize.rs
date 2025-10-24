@@ -19,7 +19,7 @@ pub struct Initialize<'info> {
 
         #[account(init,
         payer = authority,
-        space = 8+3*32+32)]
+        space = 8+3*32+32)] //donut forget to update if changed  the Team struct
     pub team: Account<'info, Team>,
 
     pub system_program: Program<'info, System>
@@ -32,7 +32,7 @@ pub fn handler(ctx: Context<Initialize>) -> Result<()> {
     counter.bump = ctx.bumps.counter;
 
     let team = &mut ctx.accounts.team;
-    team.members = vec![];
+    team.players = vec![];
 
 
 

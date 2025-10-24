@@ -16,10 +16,10 @@ pub struct JoinTeam<'info>{
 pub fn handler(ctx: Context<JoinTeam>) -> Result<()>
 {
     let team = &mut ctx.accounts.team;
-    if team.members.len() >= 3
+    if team.players.len() >= 3
         {return Err(Error::from(TooMuchPlayersInTeam))}
 
-    team.members.push(
+    team.players.push(
         ctx.accounts.member.pubkey
     );
 
