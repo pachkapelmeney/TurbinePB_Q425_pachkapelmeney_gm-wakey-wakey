@@ -2,5 +2,12 @@ use anchor_lang::prelude::*;
 
 #[account]
 pub struct Player{
-    pub pubkey: Pubkey,
+
+
+    pub authority: Pubkey,
+
+    ///player is assigned to #team
+    pub team: Pubkey,
+
+    pub wake_up_time_utc: u64,
 }
