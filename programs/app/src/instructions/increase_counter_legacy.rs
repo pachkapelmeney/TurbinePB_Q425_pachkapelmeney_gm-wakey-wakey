@@ -16,7 +16,7 @@ pub struct IncreaseCounter<'info>{
 }
 
 pub fn handler(ctx: Context<IncreaseCounter>) -> Result<()>{
-    ctx.accounts.counter.count = ctx.accounts.counter.count.checked_add(1).ok_or(ErrorCode::CustomError)?;
+    ctx.accounts.counter.count = ctx.accounts.counter.count.checked_add(1).ok_or(ErrorCode::Overflow)?;
 
     Ok(())
 }
