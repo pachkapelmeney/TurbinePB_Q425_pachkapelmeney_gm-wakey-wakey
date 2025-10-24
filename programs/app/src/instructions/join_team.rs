@@ -13,7 +13,7 @@ pub struct JoinTeam<'info>{
         init,
         payer = authority,
         space = 8+32+32+8,
-        seeds = [b"player", authority.key().as_ref()],
+        seeds = [b"player", &team.key().to_bytes().as_ref(), authority.key().as_ref()],
         bump
     )]
     pub player: Account<'info, Player>,
@@ -21,7 +21,7 @@ pub struct JoinTeam<'info>{
     #[account(mut)]
     pub team: Account<'info, Team>,
 
-    #[account(mut)]
+    #[account]
     pub system_program: Program<'info, System>
 }
 

@@ -29,7 +29,5 @@ pub fn handler(ctx: Context<PlayerCheckIn>, submited_wake_up_time_utc: u64) -> R
     if (submited_wake_up_time_utc > legit_checkin_window) //:TODO add an "automatic fail" if not submitteed on time
         {team.streak_counter = 0;} //even 1 late-submitted player resets the whole team streak!
 
-    
-
     Ok(())
 }
