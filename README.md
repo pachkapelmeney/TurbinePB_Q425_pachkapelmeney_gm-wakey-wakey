@@ -45,6 +45,14 @@ GM-wakey-wakey app introduces social accountability. By joining a team, you comm
     *   **When:** I attempt to check-in after my personal time window has closed.
     *   **Then:** The transaction should fail with a "CheckInWindowClosed" error.
 
+## Future vision
+- Frontend / Mobile app for checkin via your wallet / scan qr-code!
+- Screen for choosing a team, leaderbord etc
+- improve the streak logic
+- Discord bot for Social Proof : (StreakContinued, StreakBroken) events in a channel
+- NFT-achievments for 7/30/100 of being on schedule!
+- Add ability to bet some SOL and duel someone? Burning money is a good motivator.
+
 ## How It Works: On-Chain Logic
 
 The program leverages a two-account model to manage state:
