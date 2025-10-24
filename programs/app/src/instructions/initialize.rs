@@ -1,5 +1,7 @@
 use anchor_lang::prelude::*;
 use crate::state::Counter;
+use crate::state::Team;
+use crate::state::Player;
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
@@ -15,6 +17,11 @@ pub struct Initialize<'info> {
     
     pub counter: Account<'info, Counter>,
 
+        #[account(init,
+        payer = authority,
+        space = 8+3*32+32)]
+    pub team: Account<'info, Team>,
+
     pub system_program: Program<'info, System>
 }
 
@@ -23,6 +30,12 @@ pub fn handler(ctx: Context<Initialize>) -> Result<()> {
     counter.authority = ctx.accounts.authority.key();
     counter.count = 0;
     counter.bump = ctx.bumps.counter;
+
+    let team = &mut ctx.accounts.team;
+    team.members = vec![];
+
+
+
     // ctx.accounts.authority 
     msg!("Greetings from: {:?}", ctx.program_id);
     Ok(())

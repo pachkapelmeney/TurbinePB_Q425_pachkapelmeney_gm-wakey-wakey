@@ -22,4 +22,8 @@ pub mod app {
     pub fn increase_counter(ctx: Context<IncreaseCounter>) -> Result<()> {
         increase_counter::handler(ctx)
     }
+
+    pub fn player_check_in
+
+    pub fn join_team
 }
