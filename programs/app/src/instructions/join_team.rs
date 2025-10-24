@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
-use crate::{Player, Team, Error};
-use crate::error::ErrorCode::TooMuchPlayersInTeam;
+use crate::{Player, Team};
+use crate::error::ErrorCode;
 
 #[derive(Accounts)]
 pub struct JoinTeam<'info>{
@@ -9,6 +9,9 @@ pub struct JoinTeam<'info>{
     #[account(mut)]
     pub authority: Signer<'info>,
     
+    #[account(mut)]
+    pub team: Account<'info, Team>,
+
     #[account(
         init,
         payer = authority,
@@ -18,10 +21,6 @@ pub struct JoinTeam<'info>{
     )]
     pub player: Account<'info, Player>,
 
-    #[account(mut)]
-    pub team: Account<'info, Team>,
-
-    #[account]
     pub system_program: Program<'info, System>
 }
 
@@ -33,18 +32,11 @@ pub fn handler(ctx: Context<JoinTeam>) -> Result<()>
     // let push_result = team.players.push(
     //     player.key()
     // );
-    if team.player_count >= 3 {
-        return Err(error!(ErrorCode::TooMuchPlayersInTeam));
-    }
+    if team.player_count >= 3 { return Err(error!(ErrorCode::TooMuchPlayersInTeam)); }
 
     let player = &mut ctx.accounts.player;
-    
-    
-
     player.team = team.key();
-
-    require!(player.authority.key() == ctx.accounts.authority.key(), crate::error::ErrorCode::TooMuchPlayersInTeam);
-
+    player.authority = ctx.accounts.authority.key();
     team.player_count = team.player_count.saturating_add(1);
 
     Ok(())
